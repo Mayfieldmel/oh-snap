@@ -16,4 +16,5 @@ describe('PhotoList is rendering', () => {
     const { asFragment } = render(<PhotoList currentCategory={portrait} />)
     expect(asFragment()).toMatchSnapshot()
   });
+  
 });

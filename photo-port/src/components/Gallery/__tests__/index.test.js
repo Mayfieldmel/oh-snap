@@ -12,7 +12,7 @@ describe('Gallery is rendering', () => {
   it('renders', () => {
     render(<Gallery currentCategory={portrait} />);
   });
-  
+
 // uses .toMatchSnapshot() to make sure the gallery matches its snapshot
   it('matches snapshot', () => {
     const { asFragment } = render(<Gallery currentCategory={portrait} />)

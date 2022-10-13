@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 // import logo from './logo.svg';
-import './App.css';
-import About from './components/About';
-import Nav from './components/Nav';
-import Gallery from './components/Gallery';
-import ContactForm from './components/Contact';
+import "./App.css";
+import About from "./components/About";
+import Nav from "./components/Nav";
+import Gallery from "./components/Gallery";
+import ContactForm from "./components/Contact";
 
 function App() {
-  // navigation categories
+  // contact navigation
+  const [contactSelected, setContactSelected] = useState(false);
+
+  // gallery navigation categories
   const [categories] = useState([
     {
       name: "commercial",
@@ -22,20 +25,27 @@ function App() {
     },
   ]);
 
-  // nav event listener function
-  const [currentCategory, setCurrentCategory] = useState(categories[0])
+  // gallery nav event listener function
+  const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
   return (
     <div>
-     <Nav
+      <Nav
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
-        <ContactForm></ContactForm>
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {!contactSelected ? (
+          <>
+            <Gallery currentCategory={currentCategory}></Gallery>
+            <About></About>
+          </>
+        ) : (
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );

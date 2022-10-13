@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Modal from '../Modal';
 
 // PhotoList component is child of Gallery
 function PhotoList({category}) {
@@ -104,14 +105,29 @@ function PhotoList({category}) {
     //   filter photos by category
       const currentPhotos = photos.filter((photo) => photo.category === category);
 
+    //   current photo state
+      const [currentPhoto, setCurrentPhoto] = useState();
+
+    //   open photo on click
+      const toggleModal = (image, i) => {
+        // current photo
+        setCurrentPhoto({...image, index: i})
+        // open modal
+        setIsModalOpen(true);
+      }
+    //  modal state
+      const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div>
+        {isModalOpen && <Modal currentPhoto={currentPhoto}/>}
         <div className="flex-row">
         {currentPhotos.map((image, i) => (
           <img
             src={require(`../../assets/small/${category}/${i}.jpg`).default}
             alt={image.name}
             className="img-thumbnail mx-1"
+            onClick={() => toggleModal(image, i)}
             key={image.name}
           />
         ))}
